@@ -8,28 +8,53 @@ import axios from "axios"
 
 const Contact = () => {
 
-    const onSubmit = async (event) => {
-        event.preventDefault();
-        const formData = new FormData(event.target);
-    
-        formData.append("access_key", "7935bd7c-5c69-4a8e-a022-c4ee137be656");
-    
-        const object = Object.fromEntries(formData);
-        const json = JSON.stringify(object);
-    
-        const res = await fetch("https://api.web3forms.com/submit", {
-          method: "POST",
-          headers: {
-            "Content-Type": "application/json",
-            Accept: "application/json"
-          },
-          body: json
-        }).then((res) => res.json());
-    
-        if (res.success) {
-            alert(res.message);
+  const onSubmit = async (event) => {
+    event.preventDefault();
+    const formData = new FormData(event.target);
+
+    const object = Object.fromEntries(formData);
+    const json = JSON.stringify(object);
+
+    try {
+      
+      const res = await axios.post("http://localhost:5000/api/email", json, {
+        headers: {
+          "Content-Type": "application/json"
         }
-    };
+      });
+      if (res.status == 200) {
+        alert("Email sent successfully")
+      } else {
+        alert("Error sending email")
+      }
+    } catch (error) {
+      alert("Error sending email")
+    }
+
+  };
+  
+    // const onSubmit = async (event) => {
+    //     event.preventDefault();
+    //     const formData = new FormData(event.target);
+    
+    //     formData.append("access_key", "7935bd7c-5c69-4a8e-a022-c4ee137be656");
+    
+    //     const object = Object.fromEntries(formData);
+    //     const json = JSON.stringify(object);
+    
+    //     const res = await fetch("https://api.web3forms.com/submit", {
+    //       method: "POST",
+    //       headers: {
+    //         "Content-Type": "application/json",
+    //         Accept: "application/json"
+    //       },
+    //       body: json
+    //     }).then((res) => res.json());
+    
+    //     if (res.success) {
+    //         alert(res.message);
+    //     }
+    // };
     
     const leetcode = () => {
         window.open("https://leetcode.com/u/yashkesharwani559", "_blank");
