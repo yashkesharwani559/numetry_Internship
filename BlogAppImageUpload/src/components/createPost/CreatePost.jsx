@@ -28,7 +28,8 @@ function CreatePost() {
     }
 
     try {
-      await axios.post("http://localhost:5000/api/posts", formData, {
+      // await axios.post("http://localhost:5000/api/posts", formData, {
+      await axios.post("https://blogappbackend-q4bb.onrender.com/api/posts", formData, {
         headers: { "Content-Type": "multipart/form-data" }
       });
       alert("Post Created Successfully!");

@@ -6,7 +6,8 @@ function BlogList() {
   const [posts, setPosts] = useState([]);
 
   useEffect(() => {
-    axios.get("http://localhost:5000/api/posts")
+    // axios.get("http://localhost:5000/api/posts")
+    axios.get("https://blogappbackend-q4bb.onrender.com/api/posts")
       .then((response) => setPosts(response.data))
       .catch((error) => console.error("Error fetching posts:", error));
   }, []);
