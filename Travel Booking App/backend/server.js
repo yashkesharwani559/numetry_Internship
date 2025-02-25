@@ -45,6 +45,10 @@ const schema = buildSchema(`
     destination: String!
   }
 
+  type DeleteResponse {
+    message: String!
+  }
+
   type Query {
     bookings: [Booking]
   }
@@ -59,16 +63,54 @@ const schema = buildSchema(`
       travelDate: String!,
       destination: String!
     ): Booking
+    
+    updateBooking(
+      id: ID!,
+      name: String!,
+      age: Int!,
+      bookingStatus: String!,
+      vehicleName: String!,
+      seatNo: String!,
+      travelDate: String!,
+      destination: String!
+    ): Booking
+    
+    deleteBooking(id: ID!): DeleteResponse
   }
 `);
 
 // Define Resolvers
 const root = {
   bookings: async () => await Booking.find(),
+
   createBooking: async ({ name, age, bookingStatus, vehicleName, seatNo, travelDate, destination }) => {
     const newBooking = new Booking({ name, age, bookingStatus, vehicleName, seatNo, travelDate, destination });
     await newBooking.save();
     return newBooking;
+  },
+
+  updateBooking: async ({ id, name, age, bookingStatus, vehicleName, seatNo, travelDate, destination }) => {
+    const updatedBooking = await Booking.findByIdAndUpdate(
+      id,
+      { name, age, bookingStatus, vehicleName, seatNo, travelDate, destination },
+      { new: true }
+    );
+
+    if (!updatedBooking) {
+      throw new Error("Booking not found");
+    }
+
+    return updatedBooking;
+  },
+
+  deleteBooking: async ({ id }) => {
+    const deletedBooking = await Booking.findByIdAndDelete(id);
+
+    if (!deletedBooking) {
+      throw new Error("Booking not found");
+    }
+
+    return { message: "Booking deleted successfully" };
   },
 };
 

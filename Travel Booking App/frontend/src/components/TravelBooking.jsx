@@ -88,7 +88,8 @@ export default function TravelBooking() {
       });
 
       // Redirect to FetchBookings after successful booking
-      navigate("/", { state: { newBooking } });
+      if(alert("Booking Saved Successfully"))
+        navigate("/", { state: { newBooking } });
 
     } catch (error) {
       console.error("Error:", error);
