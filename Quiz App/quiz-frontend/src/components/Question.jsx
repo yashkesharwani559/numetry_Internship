@@ -2,7 +2,7 @@ import React from 'react';
 import { motion } from 'framer-motion';
 
 function Question({ question, questionNumber, totalQuestions, onAnswerSelected }) {
-
+  console.log(question)
   return (
     <div className="flex flex-col items-center justify-center min-h-screen bg-gradient-to-br from-blue-100 to-purple-200 text-gray-800 p-6">
       <motion.div
@@ -14,7 +14,7 @@ function Question({ question, questionNumber, totalQuestions, onAnswerSelected }
         <div className="text-lg font-medium text-blue-600 mb-4">
           Question {questionNumber} of {totalQuestions}
         </div>
-        <h2 className="text-2xl font-bold mb-6 text-gray-900">{question.question}</h2>
+        <h2 className="text-2xl font-bold mb-6 text-gray-900">{question.text}</h2>
         <div className="grid grid-cols-1 gap-4">
           {question.options.map((option, index) => (
             <motion.button

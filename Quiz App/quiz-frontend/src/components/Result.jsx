@@ -48,7 +48,7 @@ function Result({ score, totalQuestions, restartQuiz, questions, userAnswers }) 
               transition={{ duration: 0.3, delay: index * 0.1 }}
               className={`p-4 mb-3 rounded-lg shadow-md ${userAnswers[index] === question.correctAnswer ? 'bg-green-100' : 'bg-red-100'}`}
             >
-              <p className="text-gray-800 font-semibold">Q{index + 1}: {question.question}</p>
+              <p className="text-gray-800 font-semibold">Q{index + 1}: {question.text}</p>
               <p className="text-gray-700">Your answer: <span className="font-medium">{userAnswers[index]}</span></p>
               <p className="text-gray-700">Correct answer: <span className="font-medium">{question.correctAnswer}</span></p>
             </motion.div>
