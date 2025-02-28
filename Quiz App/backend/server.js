@@ -210,8 +210,10 @@ async function seedQuestionsIfEmpty() {
 // Call the seed function when the server starts
 seedQuestionsIfEmpty().catch(err => console.error('Seeding error:', err));
 
-// Set port and start server
-const PORT = process.env.PORT || 5000;
-app.listen(PORT, () => {
-  console.log(`Server running on port ${PORT}`);
-});
+// // Set port and start server
+// const PORT = process.env.PORT || 5000;
+// app.listen(PORT, () => {
+//   console.log(`Server running on port ${PORT}`);
+// });
+
+module.exports = app;
